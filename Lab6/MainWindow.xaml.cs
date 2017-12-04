@@ -134,8 +134,6 @@ namespace Lab6
         {
               Dispatcher.Invoke(() =>
                 {
-                    TextBoxEmptyGlass.Text = "EmptyGlass: " + EmptyGlassQueue.Count.ToString();
-                    TextBoxCleanGlass.Text = "CleanGlass: " + CleanGlassQueue.Count.ToString();
                     TextBoxShelfGlass.Text = "ShelfGlass: " + ShelfGlassQueue.Count.ToString();
                     ListboxWaitress.Items.Insert(0,  s);
                 });

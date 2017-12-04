@@ -35,8 +35,8 @@ namespace Lab6
                         callBack(MainWindow.PatronQueue.First().name + " looks for chair");
                         Thread.Sleep(4000); //test 4: waitspeed = 8000
 
-                        callBack(MainWindow.PatronQueue.First().name + " sits down and drinks beer");
                         MainWindow.ChairQueue.TryTake(out Chair l);
+                        callBack(MainWindow.PatronQueue.First().name + " sits down and drinks beer");
                         Thread.Sleep(GlobalVariables.rand.Next(3000, 20000)); //test 4: waitspeed = 6000, 40000
 
                         MainWindow.ChairQueue.TryAdd(new Chair());
