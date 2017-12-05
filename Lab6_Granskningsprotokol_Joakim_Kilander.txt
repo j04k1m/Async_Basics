@@ -1,0 +1,14 @@
+Andreas & Johanna
+https://github.com/johannaastrom/Labb6
+
+minst tre saker som ni tycker att gruppen har gjort bra+ använder try catch
++ tydlig kod
++ använder try catch
++ bra variabel namn
++ använder CancellationToken
+
+en eller två saker som man hade kunnat göra annorlunda eller bättre
+andra reflektioner
+* mindre antal collections
+* globala variabler
+* variabel för Thread.Sleep() sekunder

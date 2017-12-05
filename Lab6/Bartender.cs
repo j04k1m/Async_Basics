@@ -43,6 +43,7 @@ namespace Lab6
                         callBack("waits for glass");
                         Thread.Sleep(GlobalVariables.WaitSpeed);
 
+                    }
                         if (MainWindow.BartenderQueue.Count != 0 && MainWindow.ShelfGlassQueue.Count != 0)
                             {
                             callBack("gets glass");
@@ -54,7 +55,6 @@ namespace Lab6
                             MainWindow.BartenderQueue.TryDequeue(out Patron asdp);
                             Thread.Sleep(GlobalVariables.WaitSpeed);
                             }
-                    }
 
                     if (GlobalVariables.BarOpen == false && MainWindow.PatronQueue.Count == 0 && MainWindow.BartenderQueue.Count == 0)
                     {
