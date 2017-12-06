@@ -7,18 +7,20 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="719.457" Width="1007.773">
     <Grid Background="Black">
-        <ListBox x:Name="ListboxPatron" HorizontalAlignment="Left" Height="299" Margin="620,79,0,0" VerticalAlignment="Top" Width="325" FontSize="18"/>
+        <ListBox x:Name="ListboxPatron" HorizontalAlignment="Left" Height="299" Margin="620,79,0,0" VerticalAlignment="Top" Width="325" FontSize="18" x:FieldModifier="public"/>
         <ListBox x:Name="ListboxBartender" HorizontalAlignment="Left" Height="299" Margin="50,79,0,0" VerticalAlignment="Top" Width="211" FontSize="18"/>
         <ListBox x:Name="ListboxWaitress" HorizontalAlignment="Left" Height="299" Margin="327,79,0,0" VerticalAlignment="Top" Width="233" FontSize="18"/>
         <TextBox HorizontalAlignment="Left" Height="40" TextWrapping="Wrap" Text="Patron" VerticalAlignment="Top" Width="325" Margin="620,40,0,0" FontSize="24"/>
         <TextBox HorizontalAlignment="Left" Height="39" Margin="50,40,0,0" TextWrapping="Wrap" Text="Bartender" VerticalAlignment="Top" Width="211" FontSize="24"/>
         <TextBox HorizontalAlignment="Left" Height="39" Margin="327,41,0,0" TextWrapping="Wrap" Text="Waitress" VerticalAlignment="Top" Width="233" FontSize="24"/>
-        <Button x:Name="ButtonStartAll" Content="OPEN" HorizontalAlignment="Left" Margin="83,502,0,0" VerticalAlignment="Top" Width="135" Click="ButtonStartAll_Click" Height="58" FontSize="20" Background="#FF1CFF11"/>
+        <Button x:Name="ButtonStartAll" Content="OPEN" HorizontalAlignment="Left" Margin="83,502,0,0" VerticalAlignment="Top" Width="135" Click="ButtonStartAll_Click" Height="58" FontSize="20" Background="#FF1CFF11" x:FieldModifier="public"/>
         <TextBox x:Name="TextBoxShelfGlass" HorizontalAlignment="Left" Height="50" Margin="373,441,0,0" TextWrapping="Wrap" Text="Shelf Glass" VerticalAlignment="Top" Width="150" FontSize="20"/>
         <TextBox x:Name="TextBoxTables" HorizontalAlignment="Left" Height="50" Margin="373,512,0,0" TextWrapping="Wrap" Text="Chairs:" VerticalAlignment="Top" Width="150" FontSize="20"/>
         <Label x:Name="LabelShowClock" Content="Clock Here" HorizontalAlignment="Left" Margin="641,489,0,0" VerticalAlignment="Top" Height="95" Width="288" FontSize="30" Background="#FFF10B0B" FontWeight="Bold"/>
         <TextBox x:Name="TextBoxAllPatrons" HorizontalAlignment="Left" Height="50" Margin="373,582,0,0" TextWrapping="Wrap" Text="Patrons:" VerticalAlignment="Top" Width="150" FontSize="20"/>
         <Label Content="Label" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <TextBox x:Name="TextBoxCleanGlass" HorizontalAlignment="Left" Height="50" Margin="739,399,0,0" TextWrapping="Wrap" Text="Clean Glass" VerticalAlignment="Top" Width="150" FontSize="20"/>
+        <TextBox x:Name="TextBoxEmptyGlass" HorizontalAlignment="Left" Height="50" Margin="570,399,0,0" TextWrapping="Wrap" Text="Empty Glass" VerticalAlignment="Top" Width="150" FontSize="20"/>
 
     </Grid>
 </Window>

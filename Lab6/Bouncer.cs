@@ -14,9 +14,6 @@ namespace Lab6
         public void Work(Action<string> callBack/*"Allt som ska skickas till main"*/)
         {
             Random RandomNumber = new Random();
-            //Task.Run(() =>
-            //{
-                   //MainWindow.BartenderQueue.Enqueue(new Patron("RandomName"));
                     
                     while (GlobalVariables.BouncerLoad)
                     {   
@@ -24,6 +21,7 @@ namespace Lab6
                         int a = RandomNumber.Next(4, 11);
                         string RandomName = names.ElementAt(n);
 
+                        Thread.Sleep(1000);
                         MainWindow.BartenderQueue.Enqueue(new Patron(RandomName));
                         callBack(RandomName + " enters bar");
                         Thread.Sleep(RandomNumber.Next(3000, 10000)); //BussLoad wait time: 6000, 20000

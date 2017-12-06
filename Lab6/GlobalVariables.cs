@@ -15,6 +15,7 @@ namespace Lab6
         public static bool PatronLoad = true;
         public static bool BartenderLoad = true;
         public static bool WaitressLoad = true;
+        public static bool ClosedLoad = true;
 
         public static int WaitSpeed = 3000;
         public static int FetchSpeedX2 = 5000;

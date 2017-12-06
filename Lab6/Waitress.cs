@@ -12,38 +12,49 @@ namespace Lab6
 
         public void Work(Action<string> callBack /*"Allt som ska skickas till main"*/)
         {
-                while (GlobalVariables.WaitressLoad)
+            while (GlobalVariables.WaitressLoad)
+            {
+                Thread.Sleep(1000);
+                if (GlobalVariables.BarOpen == false && MainWindow.DirtyGlassQueue.Count == 0 && MainWindow.DishesGlassQueue.Count == 0 && MainWindow.ShelfGlassQueue.Count == 8)
                 {
-
-                    if (MainWindow.EmptyGlassQueue.Count != 0)
-                    {
-                        callBack("fetches empty/dirty glass");
-                        Thread.Sleep(10000);
-
-                        callBack("dishes glass");
-                        Thread.Sleep(15000);
-                        MainWindow.EmptyGlassQueue.TryTake(out Glass glassd);
-                        MainWindow.CleanGlassQueue.TryAdd(new Glass());
-
-                        callBack("puts glass on shelf");
-                        MainWindow.ShelfGlassQueue.TryAdd(new Glass());
-                        MainWindow.CleanGlassQueue.TryTake(out Glass glassr);
-                        Thread.Sleep(GlobalVariables.WaitSpeed);
-                    }
-                    
-
-                    if(GlobalVariables.BarOpen == false && MainWindow.ShelfGlassQueue.Count == 8 && MainWindow.EmptyGlassQueue.Count == 0)
-                    {
-                        GlobalVariables.WaitressLoad = false;
-                        callBack("*Waitress Leaves*");
-                    }
-
-                    if(MainWindow.PatronQueue.Count != 0 && MainWindow.EmptyGlassQueue.Count == 0)
-                    {
-                        callBack("wait for glass");
-                        Thread.Sleep(GlobalVariables.WaitSpeed);
-                    }
+                    GlobalVariables.WaitressLoad = false;
+                    callBack("*Waitress Leaves*");
                 }
+
+                if (MainWindow.DirtyGlassQueue.Count == 0 && GlobalVariables.BarOpen == true)
+                {
+                    callBack("wait for glass");
+                    Thread.Sleep(GlobalVariables.WaitSpeed);
+                }
+
+                if (MainWindow.DirtyGlassQueue.Count != 0)
+                {
+                    //int NumbersGlass = 0;
+                    //int DishGlasses = MainWindow.EmptyGlassQueue.Count;
+
+                    callBack("fetches " + MainWindow.DirtyGlassQueue.Count.ToString() + " dirty glass");
+                    foreach (var glass in MainWindow.DirtyGlassQueue)
+                    {
+                        MainWindow.DirtyGlassQueue.Take();
+                        MainWindow.DishesGlassQueue.Add(new Glass());
+                    }
+                    Thread.Sleep(10000);
+
+                    callBack("dishes " + MainWindow.DishesGlassQueue.Count + " glass");
+                    Thread.Sleep(15000);
+
+                    callBack("puts " + MainWindow.DishesGlassQueue.Count + " glass on shelf");
+                    foreach (var glass in MainWindow.DishesGlassQueue)
+                    {
+                        MainWindow.DishesGlassQueue.Take();
+                        MainWindow.ShelfGlassQueue.Add(new Glass());
+                    }
+                    Thread.Sleep(GlobalVariables.WaitSpeed);
+
+                }
+
+
+            }
         }
 
     }

@@ -11,9 +11,9 @@ namespace Lab6
 {
     public class Patron
     {
-        //Constructor
         public string name { get; set; }
 
+        //Constructor
         public Patron(string s)
         {
             name = s;
@@ -22,30 +22,41 @@ namespace Lab6
 
         public void Work(Action<string> callBack/*"Allt som ska skickas till main"*/)
         {
-                while (GlobalVariables.PatronLoad)
-                {
-                    if(MainWindow.PatronQueue.Count != 0 && MainWindow.ChairQueue.Count == 0)
+
+            Task.Run(() =>
+            {
+
+                    Thread.Sleep(1000);
+                    while (MainWindow.ChairQueue.Count == 0)
                     {
                         callBack(MainWindow.PatronQueue.First().name + " waits for chair");
                         Thread.Sleep(4000); //test 4: waitspeed = 8000
                     }
+
+                    Thread.Sleep(4000); //test 4: waitspeed = 8000
+                    MainWindow.ChairQueue.Take();
+                    //callBack(MainWindow.FinishesBeerQueue.First().name + " sits down");
+                    callBack(MainWindow.PatronQueue.First().name + " sits down");
+
+                    //Finishes beer Queue
+
+                    //FinishBeerQueue Enqueue
+                    MainWindow.FinishesBeerQueue.Enqueue(new Patron(MainWindow.PatronQueue.First().name));
+                    //PatronQueue Dequeue
+                    MainWindow.PatronQueue.TryDequeue(out Patron d);
+
+                    Thread.Sleep(GlobalVariables.rand.Next(10000, 20000)); //test 4: waitspeed = 6000, 40000
+                    MainWindow.ChairQueue.Add(new Chair());
+                    MainWindow.DirtyGlassQueue.Add(new Glass());
+                    //callBack(MainWindow.PatronQueue.First().name + " finishes beer and leaves");
+                    callBack(MainWindow.FinishesBeerQueue.First().name + " finishes beer and leaves");
+                    //MainWindow.PatronQueue.TryDequeue(out Patron adl);
+                    MainWindow.FinishesBeerQueue.TryDequeue(out Patron smk);
+
+            });
+                
                     
-                    if (MainWindow.PatronQueue.Count != 0 && MainWindow.ChairQueue.Count != 0 /*&& MainWindow.ChairQueue.Count != 0*/)
-                    {
-                        callBack(MainWindow.PatronQueue.First().name + " looks for chair");
-                        Thread.Sleep(4000); //test 4: waitspeed = 8000
-
-                        MainWindow.ChairQueue.TryTake(out Chair l);
-                        callBack(MainWindow.PatronQueue.First().name + " sits down and drinks beer");
-                        Thread.Sleep(GlobalVariables.rand.Next(3000, 20000)); //test 4: waitspeed = 6000, 40000
-
-                        MainWindow.ChairQueue.TryAdd(new Chair());
-                        MainWindow.EmptyGlassQueue.Add(new Glass());
-                        callBack(MainWindow.PatronQueue.First().name + " leaves bar");
-                        MainWindow.PatronQueue.TryDequeue(out Patron adl);
-                        Thread.Sleep(GlobalVariables.WaitSpeed);
-                    }
-                }
+               
         }
 
     }

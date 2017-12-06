@@ -28,16 +28,18 @@ namespace Lab6
         
         Bouncer bounce = new Bouncer();
         Patron customer = new Patron();
-        Bartender bt = new Bartender();
+        Bartender bt = new Bartender(); 
         Waitress waits = new Waitress();
+        Klose klose = new Klose();
 
-        public static BlockingCollection<Glass> EmptyGlassQueue = new BlockingCollection<Glass>();
-        public static BlockingCollection<Glass> CleanGlassQueue = new BlockingCollection<Glass>();
+        public static BlockingCollection<Glass> DirtyGlassQueue = new BlockingCollection<Glass>();
+        public static BlockingCollection<Glass> DishesGlassQueue = new BlockingCollection<Glass>();
         public static BlockingCollection<Glass> ShelfGlassQueue = new BlockingCollection<Glass>();
 
         public static BlockingCollection<Chair> ChairQueue = new BlockingCollection<Chair>();
 
         public static ConcurrentQueue<string> BouncerQueue = new ConcurrentQueue<string>();
+        /***test***/ public static ConcurrentQueue<Patron> FinishesBeerQueue = new ConcurrentQueue<Patron>();
         public static ConcurrentQueue<Patron> PatronQueue = new ConcurrentQueue<Patron>();
         public static ConcurrentQueue<Patron> BartenderQueue = new ConcurrentQueue<Patron>();
 
@@ -86,14 +88,19 @@ namespace Lab6
                 bounce.Work(FillPatronListBox);
             });
 
-            Task.Run(() =>
+            /* Task.Run(() =>
             {
                 customer.Work(FillPatronListBox);
+            }); */
+
+            Task.Run(() =>
+            {
+                klose.Work(ClearAllListBoxes, FillBartenderListBox, FillWaitressListBox, FillPatronListBox);
             });
                 
             Task.Run(() =>
             {
-                bt.Work(FillBartenderListBox);
+                bt.Work(FillBartenderListBox, FillPatronListBox);
             });
 
             Task.Run(() =>
@@ -104,18 +111,23 @@ namespace Lab6
         }
 
         //Funktioner
-        private void ClearAllListBoxes()
+        public void ClearAllListBoxes()
         {
-            ListboxBartender.Items.Clear();
-            ListboxPatron.Items.Clear();
-            ListboxWaitress.Items.Clear();
+            Dispatcher.Invoke(() =>
+            {
+                ListboxBartender.Items.Clear();
+                ListboxWaitress.Items.Clear();
+                ListboxPatron.Items.Clear();
+            });
         }
 
         public void FillBartenderListBox(string s)
         {
                 Dispatcher.Invoke(() =>
                 {
-                    TextBoxAllPatrons.Text = "Patrons " + (PatronQueue.Count + BartenderQueue.Count).ToString();
+                    TextBoxShelfGlass.Text = "ShelfGlass: " + ShelfGlassQueue.Count.ToString();
+                    TextBoxEmptyGlass.Text = "DirtyGlass: " + DirtyGlassQueue.Count.ToString();
+                    TextBoxAllPatrons.Text = "Patrons " + (PatronQueue.Count + BartenderQueue.Count /***test***/ + FinishesBeerQueue.Count).ToString();
                     ListboxBartender.Items.Insert(0, s);
                 });
         }
@@ -125,8 +137,9 @@ namespace Lab6
 
                 Dispatcher.Invoke(() =>
                 {
-                    ListboxPatron.Items.Insert(0, s);
+                    TextBoxEmptyGlass.Text = "DirtyGlass: " + DirtyGlassQueue.Count.ToString();
                     TextBoxTables.Text = "Chairs: " + ChairQueue.Count.ToString();
+                    ListboxPatron.Items.Insert(0, s);
                 });
         }
 
@@ -135,6 +148,8 @@ namespace Lab6
               Dispatcher.Invoke(() =>
                 {
                     TextBoxShelfGlass.Text = "ShelfGlass: " + ShelfGlassQueue.Count.ToString();
+                    TextBoxEmptyGlass.Text = "DirtyGlass: " + DirtyGlassQueue.Count.ToString();
+                    TextBoxCleanGlass.Text = "DishesGlass: " + DishesGlassQueue.Count.ToString();
                     ListboxWaitress.Items.Insert(0,  s);
                 });
         }
@@ -143,7 +158,7 @@ namespace Lab6
         {
             for(int x = 0; x <GlobalVariables.EmptyGlass; x++)
             {
-                MainWindow.EmptyGlassQueue.Add(new Glass());
+                MainWindow.DirtyGlassQueue.Add(new Glass());
             }
         }
 
@@ -151,7 +166,7 @@ namespace Lab6
         {
             for (int x = 0; x < GlobalVariables.CleanGlass; x++)
             {
-                MainWindow.CleanGlassQueue.Add(new Glass());
+                MainWindow.DishesGlassQueue.Add(new Glass());
             }
         }
 
