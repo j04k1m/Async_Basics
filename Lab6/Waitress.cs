@@ -29,9 +29,6 @@ namespace Lab6
 
                 if (MainWindow.DirtyGlassQueue.Count != 0)
                 {
-                    //int NumbersGlass = 0;
-                    //int DishGlasses = MainWindow.EmptyGlassQueue.Count;
-
                     callBack("fetches " + MainWindow.DirtyGlassQueue.Count.ToString() + " dirty glass");
                     foreach (var glass in MainWindow.DirtyGlassQueue)
                     {

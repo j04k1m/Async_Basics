@@ -1,0 +1,13 @@
+Andreas & Johanna
+https://github.com/johannaastrom/Labb6/tree/HelgFix/Labb6
+
+minst tre saker som ni tycker att gruppen har gjort bra
++ tydlig kod
++ tydlig UI
++ använder try catch
++ bra variabel namn
++ använder CancellationToken
+
+en eller två saker som man hade kunnat göra annorlunda eller bättre
+* mindre antal collections
+* globala variabler

@@ -39,7 +39,7 @@ namespace Lab6
         public static BlockingCollection<Chair> ChairQueue = new BlockingCollection<Chair>();
 
         public static ConcurrentQueue<string> BouncerQueue = new ConcurrentQueue<string>();
-        /***test***/ public static ConcurrentQueue<Patron> FinishesBeerQueue = new ConcurrentQueue<Patron>();
+        public static ConcurrentQueue<Patron> FinishesBeerQueue = new ConcurrentQueue<Patron>();
         public static ConcurrentQueue<Patron> PatronQueue = new ConcurrentQueue<Patron>();
         public static ConcurrentQueue<Patron> BartenderQueue = new ConcurrentQueue<Patron>();
 
@@ -87,11 +87,6 @@ namespace Lab6
             {
                 bounce.Work(FillPatronListBox);
             });
-
-            /* Task.Run(() =>
-            {
-                customer.Work(FillPatronListBox);
-            }); */
 
             Task.Run(() =>
             {

@@ -35,11 +35,9 @@ namespace Lab6
 
                     Thread.Sleep(4000); //test 4: waitspeed = 8000
                     MainWindow.ChairQueue.Take();
-                    //callBack(MainWindow.FinishesBeerQueue.First().name + " sits down");
                     callBack(MainWindow.PatronQueue.First().name + " sits down");
 
                     //Finishes beer Queue
-
                     //FinishBeerQueue Enqueue
                     MainWindow.FinishesBeerQueue.Enqueue(new Patron(MainWindow.PatronQueue.First().name));
                     //PatronQueue Dequeue
@@ -48,9 +46,7 @@ namespace Lab6
                     Thread.Sleep(GlobalVariables.rand.Next(10000, 20000)); //test 4: waitspeed = 6000, 40000
                     MainWindow.ChairQueue.Add(new Chair());
                     MainWindow.DirtyGlassQueue.Add(new Glass());
-                    //callBack(MainWindow.PatronQueue.First().name + " finishes beer and leaves");
                     callBack(MainWindow.FinishesBeerQueue.First().name + " finishes beer and leaves");
-                    //MainWindow.PatronQueue.TryDequeue(out Patron adl);
                     MainWindow.FinishesBeerQueue.TryDequeue(out Patron smk);
 
             });
