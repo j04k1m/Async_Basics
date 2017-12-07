@@ -120,9 +120,8 @@ namespace Lab6
         {
                 Dispatcher.Invoke(() =>
                 {
-                    TextBoxShelfGlass.Text = "ShelfGlass: " + ShelfGlassQueue.Count.ToString();
-                    TextBoxEmptyGlass.Text = "DirtyGlass: " + DirtyGlassQueue.Count.ToString();
-                    TextBoxAllPatrons.Text = "Patrons " + (PatronQueue.Count + BartenderQueue.Count /***test***/ + FinishesBeerQueue.Count).ToString();
+                    TextBoxShelfGlass.Text = "Glass: " + ShelfGlassQueue.Count.ToString();
+                    TextBoxAllPatrons.Text = "Patrons " + (PatronQueue.Count + BartenderQueue.Count + FinishesBeerQueue.Count).ToString();
                     ListboxBartender.Items.Insert(0, s);
                 });
         }
@@ -132,7 +131,6 @@ namespace Lab6
 
                 Dispatcher.Invoke(() =>
                 {
-                    TextBoxEmptyGlass.Text = "DirtyGlass: " + DirtyGlassQueue.Count.ToString();
                     TextBoxTables.Text = "Chairs: " + ChairQueue.Count.ToString();
                     ListboxPatron.Items.Insert(0, s);
                 });
@@ -142,9 +140,7 @@ namespace Lab6
         {
               Dispatcher.Invoke(() =>
                 {
-                    TextBoxShelfGlass.Text = "ShelfGlass: " + ShelfGlassQueue.Count.ToString();
-                    TextBoxEmptyGlass.Text = "DirtyGlass: " + DirtyGlassQueue.Count.ToString();
-                    TextBoxCleanGlass.Text = "DishesGlass: " + DishesGlassQueue.Count.ToString();
+                    TextBoxShelfGlass.Text = "Glass: " + ShelfGlassQueue.Count.ToString();
                     ListboxWaitress.Items.Insert(0,  s);
                 });
         }
